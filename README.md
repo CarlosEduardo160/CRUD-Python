@@ -22,7 +22,28 @@ O objetivo deste projeto foi aplicar e consolidar os ensinamentos que estive apr
 - Tratamento de erro para ID inválido
 
 ## Utilização:
-O código pedira para que o usuário digite um numero 
+Caso deseje utilizar o programa, sera necessário instalar:
+
+- MySQL
+- Conector Python para MySQL 
+
+instale o conector com o comando:
+```bash
+ pip install mysql-connector-python
+```
+Após a instalação  e configuração do banco de dados, sera necessário que o usuário conecte seu banco de dados pessoal ao código. 
+
+Seguindo o exemplo:
+```bash
+conexao = mysql.connector.connect(
+        host = 'localhost',
+        user = 'seu_usuario',
+        password = 'sua_senha',
+        database = 'seu_banco',
+)
+```
+
+O código ira pedir para que o usuário escolha uma opção
 
 ```bash
 ===MENU=====
@@ -33,11 +54,7 @@ Digite 4 para atualizar os dados de um usuário
 Digite 5 para encerrar o programa
 ============
 ```
-Basta digitar a opção que deseja, após isso, o código entra em um loop condicional de acordo com a opção desejada.
-
-Se deseja adicionar, ou atualizar um cadastro, informe os dados conforme o código pede.
-
-Se deseja excluir um usuário, basta informar o ID do usuário.
+Basta digitar a opção que deseja, após isso, o código entra em um loop até que a opção 5 seja selecionada
 
 #
 Projeto desenvolvido com fins educacionais para prática de manipulação de banco de dados utilizando Python.

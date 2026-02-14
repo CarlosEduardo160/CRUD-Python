@@ -11,6 +11,7 @@ conexao = mysql.connector.connect(
 
 cursor = conexao.cursor()
 
+#Função para imprimir o menu no terminal:
 def menu():
     print(
         "\n ===MENU==="
@@ -25,18 +26,22 @@ def menu():
 def ler_opcao():
     return input("Por favor, digite uma opção: ")
 
+#Função utilizada para adicionar um novo usuário ao banco
 def adicionar_usuario():
     nome = input("Digite o nome do usuário: ")
     cpf = input("Digite o CPF do usuário: ")
 
+    #Formatação do CPF, faz com que no banco, o CPF tenha apenas números
     cpf = "".join(filter(str.isdigit, cpf))
     
+    #Impede o CPF de ter mais de 11 dígitos.
     if len(cpf) != 11:
         print("CPF inválido.")
         return None
 
     data_digitada = input("Digite a data de nascimento no formato DD/MM/AAAA : ")
 
+    #Formatação para que o usuário possa inserir a data no padrão brasileiro
     try:
         data_nascimento = datetime.strptime(data_digitada, "%d/%m/%Y").date()
     except ValueError:
@@ -45,15 +50,18 @@ def adicionar_usuario():
     
     return nome, cpf, data_nascimento 
 
+#Função utilizada para excluir um usuário
 def excluir_usuario():
+    #Tratamento de erro: Caso o usuário digite uma letra no lugar de um número, recebera um aviso de erro
     try:
         id_usuario = int(input("Por favor, digite o ID do usuário que deseja excluir: "))
     except ValueError:
-        print("O ID digitado esta incorreto.")
+        print("O ID digitado não é válido. o ID deve conter apenas dígitos.")
         return None
 
     return id_usuario       
 
+#Função utilizada para atualizar os dados de um usuário
 def atualizar_usuario():
     try:
         id_usuario = int(input("Por favor, digite o ID do usuário que deseja alterar os dados: "))
@@ -79,13 +87,16 @@ def atualizar_usuario():
 
         return id_usuario, novo_usuario, novo_cpf, nova_data    
 
+#Loop condicional. O código irá repetir até que a opção de encerrar o sistema seja escolhida
 while True:
     menu()
     opcao = ler_opcao()
     
     if opcao == '1':
+        #Adicionamos uma variável "dados" para caso seja necessário haver algum tratamento de dados.
         dados = adicionar_usuario()
 
+        #Se em algum momento, algum valor inválido seja inserido: retornara None, fazendo com que o programa não prossiga com dados inválidos
         if dados is None:
             continue
 
@@ -121,6 +132,7 @@ while True:
                 cursor.execute(comando, valores)
                 conexao.commit()
                 
+                #cursor.rowcount é responsável por "contar" quantas linhas foram atualizadas no banco, caso nada seja atualizado, retorna um aviso de que não foi possível realizar a alteração 
                 if cursor.rowcount == 0:
                     print("ID de usuário não encontrado.")
                 else:
