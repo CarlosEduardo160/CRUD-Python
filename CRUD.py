@@ -72,7 +72,7 @@ def atualizar_usuario():
         nova_data_digitada = input("Digite uma nova data de nascimento (DD/MM/AAAA): ")
 
         try:
-            nova_data = datetime.strptime(nova_data_digitada, "%d/%m/%Y")
+            nova_data = datetime.strptime(nova_data_digitada, "%d/%m/%Y").date()
         except ValueError:
             print("Data inválida.")
             return None    
