@@ -3,10 +3,10 @@ import mysql.connector
 
 #conecte seu BD aqui
 conexao = mysql.connector.connect(
-        host = '',
-        user = '',
-        password = '',
-        database = '',
+        host = 'localhost',
+        user = 'root',
+        password = '2005',
+        database = 'bdprojeto',
 )
 
 cursor = conexao.cursor()
@@ -16,9 +16,9 @@ def menu():
     print(
         "\n ===MENU==="
         "\nDigite 1 para adicionar um novo usuário"
-        "\nDigite 2 para exibir registros"
-        "\nDigite 3 para excluir um usuário"
-        "\nDigite 4 para atualizar os dados de um usuário"
+        "\nDigite 2 para exibir lista de usuários"
+        "\nDigite 3 para excluir os dados de um usuário"
+        "\nDigite 4 para atualizar registros"
         "\nDigite 5 para encerrar o programa"
         "\n============"
     ) 
